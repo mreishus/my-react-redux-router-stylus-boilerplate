@@ -5,11 +5,17 @@ import App from './components/App';
 
 import css from './styles/main.styl';
 
+import { Provider } from 'react-redux';
+import store, { history } from './store';
+
 const rootEl = document.getElementById('root');
 ReactDOM.render(
-  <AppContainer>
-    <App />
-  </AppContainer>,
+  <Provider store={store}>
+    <AppContainer>
+      <App />
+    </AppContainer>
+  </Provider>
+  ,
   rootEl
 );
 
@@ -19,9 +25,12 @@ if (module.hot) {
     // use <App /> here rather than require() a <NextApp />.
     const NextApp = require('./components/App').default;
     ReactDOM.render(
+      <Provider store={store}>
       <AppContainer>
          <NextApp />
-      </AppContainer>,
+      </AppContainer>
+      </Provider>
+      ,
       rootEl
     );
   });
